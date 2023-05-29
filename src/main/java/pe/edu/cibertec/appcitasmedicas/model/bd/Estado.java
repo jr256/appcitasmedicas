@@ -11,10 +11,9 @@ import lombok.Data;
 @Entity
 @Table(name="estado")
 public class Estado {
-
 	@Id
 	private Integer idestado;
-	@Column(name= "estado")
+	@Column(name = "estado")
 	private String estado;
 
 }
