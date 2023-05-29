@@ -1,10 +1,177 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="layout::head">
+<meta charset="UTF-8">
+<title>Paciente</title>
 </head>
 <body>
+<script th:src="@{/js/web/paciente/frmpaciente.js}" type="text/javascript"></script>
+	<nav th:insert="layout::menu"></nav>
+	<button type="button" id="btnagregar" class="btn btn-primary">Agregar Paciente</button>
+	<hr />
+	
+	<table class="table" id="tblpaciente">
+		<thead>
+			<tr>
+				<th scope="col">Código</th>
+				<th scope="col">Nombres</th>
+				<th scope="col">Apellido Paterno</th>
+				<th scope="col">Apellido Materno</th>
+				<th scope="col">Tipo Documento</th>
+				<th scope="col">Nro Documento</th>
+				<th scope="col">Fecha de Nacimiento</th>
+				<th scope="col">Correo</th>
+				<th scope="col">Password</th>
+				<th scope="col">Estado</th>
+				<th scope="col">Actualizar</th>
+				<th scope="col">Eliminar</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="paciente :${listapaciente}">
+				<td th:text="${paciente.idspaciente}"></td>
+				<td th:text="${paciente.nombres}"></td>
+				<td th:text="${paciente.apellidopaterno}"></td>
+				<td th:text="${paciente.apellidomaterno}"></td>
+				<td th:text="${paciente.tipodocumento.tipodocumento}"></td>
+				<td th:text="${paciente.numerodocumento}"></td>
+				<td th:text="${paciente.fechanacimiento}"></td>
+				<td th:text="${paciente.correoelectronico}"></td>
+				<td th:text="${paciente.password}"></td>
+				<td th:text="${paciente.estado.estado}"></td>
+				<td>
+					<button type="button" class="btn btn-success btnactualizar"
+						th:data-idpaciente="${paciente.idpaciente}"
+						th:data-nombres="${paciente.nombres}"
+						th:data-apellidopaterno="${paciente.apellidopaterno}"
+						th:data-apellidomaterno="${paciente.apellidomaterno}"
+						th:data-idtipodocumento="${paciente.tipodocumento.idtipodocumento}"
+						th:data-numerodocumento="${paciente.numerodocumento}"
+						th:data-fechanacimiento="${paciente.fechanacimiento}"
+						th:data-correoelectronico="${paciente.correoelectronico}"
+						th:data-idestado="${paciente.estado.idestado}">
+						<i class="fas fa-pen"></i>
+					</button>
+				</td>
+				<td>
+					<button type="button" class="btn btn-danger btneliminarpaciente"
+						th:data-idpaciente="${paciente.idpaciente}"
+						th:data-nombres="${paciente.nombres}"
+						th:data-apellidopaterno="${paciente.apellidopaterno}"
+						th:data-apellidomaterno="${paciente.apellidomaterno}">
+						<i class="fas fa-trash"></i>
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>	
 
+
+	<!-- Registrar/Actualizar Paciente -->
+	
+	<div class="modal fade" id="modalPaciente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">
+						Mantenimiento de Paciente</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="mb-3">
+						<label for="txtnombres" class="form-label">
+							Nombres</label> 
+						<input type="text" class="form-control"
+							id="txtnombres" >
+					</div>
+					<div class="mb-3">
+						<label for="txtapellidpaterno" class="form-label">
+							Apellido Paterno</label> 
+						<input type="text" class="form-control"
+							id="txtapellidoPaterno" >
+					</div>
+					<div class="mb-3">
+						<label for="txtapellidomaterno" class="form-label">
+							Apellido Materno</label> 
+						<input type="text" class="form-control"
+							id="txtApellidoMaterno" >
+					</div>
+					<div class="mb-3">
+						<label for="cbotipodocumento" class="form-label">
+							Tipo Documento</label> 
+						<select class="form-control"
+							id="cbotipodocumento"></select>						
+					</div>
+					<div class="mb-3">
+						<label for="txtnumerodocumento" class="form-label">
+							Numero Documento</label> 
+						<input type="text" class="form-control"
+							id="txtnumerodocumento" >
+						</div>
+						<div class="mb-3">
+						<label for="txtfechanacimiento" class="form-label">
+							Fecha Nacimiento</label> 
+						<input type="text" class="form-control"
+							id="txtfechanacimiento" >
+					</div>
+					<div class="mb-3">
+						<label for="txtcorreoelectronico" class="form-label">
+							Correo</label> 
+						<input type="text" class="form-control"
+							id="txtcorreoelectronico" >
+					</div>
+					<div class="mb-3">
+						<label for="txtpassword" class="form-label">
+							Password</label> 
+						<input type="text" class="form-control"
+							id="txtpassword" >
+					</div>
+					<div class="mb-3">
+						<label for="cboestado" class="form-label">
+							Estado</label> 
+						<select class="form-control"
+							id="cbotiestado"></select>						
+					</div>
+					<input type="hidden" id="hddidregistropaciente">
+				</div>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary"
+						id="btnguardar">Guardar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	<!-- Eliminar Paciente -->
+	<div class="modal fade" id="modalEliminarPaciente" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">
+						Eliminar Paciente</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">		
+					<label id="mensajeeliminar"></label>
+					<input type="hidden" id="hddideliminarpaciente"
+						value="0">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary"
+						id="btneliminar">Eliminar</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
