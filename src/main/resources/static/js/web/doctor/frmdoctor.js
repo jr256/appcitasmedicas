@@ -15,10 +15,10 @@ $(document).on("click", "#btnagregar", function(){
 		url: "/TipoDocumento/listarTipoDocumentos",
 		dataType: "json",
 		success: function(resultado){
-			//console.log(resultado);
+			// console.log(resultado);
 			if(resultado.length > 0){
 				$.each(resultado, function(index, value){
-					$("#cboestado").append(
+					$("#cbotipodocumento").append(
 							`<option value="${value.idtipodocumento}">
 								${value.tipodocumento}</option>`
 							);
@@ -34,10 +34,10 @@ $(document).on("click", "#btnagregar", function(){
 		url: "/Especialidad/listarEspecialidades",
 		dataType: "json",
 		success: function(resultado){
-			//console.log(resultado);
+			// console.log(resultado);
 			if(resultado.length > 0){
 				$.each(resultado, function(index, value){
-					$("#cboestado").append(
+					$("#cboespecialidad").append(
 							`<option value="${value.idespecialidad}">
 								${value.especialidad}</option>`
 							);
@@ -54,7 +54,7 @@ $(document).on("click", "#btnagregar", function(){
 		url: "/Estado/listarEstados",
 		dataType: "json",
 		success: function(resultado){
-			//console.log(resultado);
+			// console.log(resultado);
 			if(resultado.length > 0){
 				$.each(resultado, function(index, value){
 					$("#cboestado").append(
@@ -69,22 +69,63 @@ $(document).on("click", "#btnagregar", function(){
 });
 
 $(document).on("click", ".btnactualizar", function(){
-	$("#txtdescripcion").val($(this).attr("data-descsala"));
-	$("#txtnroasientos").val($(this).attr("data-asientos"));
-	$("#hddidregistrosala").val($(this).attr("data-idsala"));
+	$("#txtnombres").val($(this).attr("data-nombres"));
+	$("#txtapellidopaterno").val($(this).attr("data-apellidopaterno"));
+	$("#txtapellidomaterno").val($(this).attr("data-apellidomaterno"));
+	$("#txtfechanacimiento").val($(this).attr("data-fechanacimiento"));
+	$("#txtnumerodocumento").val($(this).attr("data-numerodocumento"));
+	$("#txtcodigocop").val($(this).attr("data-codigocop"));
+	$("#txtcorreoinstitucional").val($(this).attr("data-correoinstitucional"));
+	$("#hddidregistrodoctor").val($(this).attr("data-iddoctor"));
 	$("#cboestado").empty();
 	var idestado = $(this).attr("data-idestado");
+	
+	$.ajax({
+		type: "GET",
+		url: "/TipoDocumento/listarTipoDocumento",
+		dataType: "json",
+		success: function(resultado){
+			// console.log(resultado);
+			if(resultado.length > 0){
+				$.each(resultado, function(index, value){
+					$("#cbotipodocumento").append(
+							`<option value="${value.idtipoducmento}">
+								${value.tipodocumento}</option>`
+							);
+				})
+				$("#cbotipodocumento").val(idtipodocumento);
+			}			
+		}
+	
+	$.ajax({
+		type: "GET",
+		url: "/Especialidad/listarEspecialidad",
+		dataType: "json",
+		success: function(resultado){
+			// console.log(resultado);
+			if(resultado.length > 0){
+				$.each(resultado, function(index, value){
+					$("#cboespecialidad").append(
+							`<option value="${value.idespecialidad}">
+								${value.especialidad}</option>`
+							);
+				})
+				$("#cboespecialidad").val(idespecialidad);
+			}			
+		}
+	
+	
 	$.ajax({
 		type: "GET",
 		url: "/Estado/listarEstados",
 		dataType: "json",
 		success: function(resultado){
-			//console.log(resultado);
+			// console.log(resultado);
 			if(resultado.length > 0){
 				$.each(resultado, function(index, value){
 					$("#cboestado").append(
 							`<option value="${value.idestado}">
-								${value.descestado}</option>`
+								${value.estado}</option>`
 							);
 				})
 				$("#cboestado").val(idestado);
@@ -97,17 +138,24 @@ $(document).on("click", ".btnactualizar", function(){
 $(document).on("click", "#btnguardar", function(){
 	$.ajax({
 		type: "POST",
-		url: "/sala/registrarSala",
+		url: "/doctor/registrarDoctor",
 		contentType: "application/json",
 		data: JSON.stringify({
-			idsala: $("#hddidregistrosala").val(),
-			descsala: $("#txtdescripcion").val(),
-			asientos: $("#txtnroasientos").val(),
+			iddoctor: $("#hddidregistrodoctor").val(),
+			nombres: $("#txtdescripcion").val(),
+			apellidopaterno: $("#txtapellidopaterno").val(),
+			apellidomaterno: $("#txtapellidomaterno").val(),
+			fechanacimiento: $("#txtfechanacimiento").val(),
+			tipodocumento: $("#txttipodocumento").val(),
+			codigocop: $("#txtcodigocop").val(),
+			correoinstitucional: $("#txtcorreoinstitucional").val(),
 			idestado: $("#cboestado").val()
+			idespecialidad: $("#cboespecialidad").val()
+			idtipodocumento: $("#cbotipodocumento").val()
 		}),
 		success: function(resultado){
 			alert(resultado.mensaje);
-			ListarSala();
+			ListarDoctor();
 		}
 	});
 	$("#modalDoctor").modal("hide");
@@ -126,41 +174,54 @@ $(document).on("click", "#btneliminar", function(){
 		contentType: 'application/json',
 		url: "/doctor/eliminarDoctor",
 		data: JSON.stringify({
-			idsala: $("#hddideliminardoctor").val()
+			iddoctor: $("#hddideliminardoctor").val()
 		}),
 		success: function(resultado){
 			alert(resultado.mensaje);
-			ListarSala();
+			ListarDoctor();
 		}
 	})
 	$("#modalEliminarDoctor").modal("hide");
 })
 
-function ListarSala(){
+function ListarDoctor(){
 	$.ajax({
 		type: "GET",
 		url: "/doctor/listarDoctores",
 		dataType: "json",
 		success: function(resultado){
-			//console.log(resultado);
+			// console.log(resultado);
 			$("#tbldoctor > tbody").html("");
 			$.each(resultado, function(index, value){
 				$("#tbldoctor > tbody").append("<tr>"+
-						"<td>"+value.idsala+"</td>"+
-						"<td>"+value.descsala+"</td>"+
-						"<td>"+value.asientos+"</td>"+
-						"<td>"+value.estado.descestado+"</td>"+
+						"<td>"+value.iddoctor+"</td>"+
+						"<td>"+value.nombres+"</td>"+
+						"<td>"+value.apellidopaterno+"</td>"+
+						"<td>"+value.apellidomaterno+"</td>"+
+						"<td>"+value.fechanacimiento+"</td>"+
+						"<td>"+value.tipodocumento.tipodocumento+"</td>"+
+						"<td>"+value.numerodocumento+"</td>"+
+						"<td>"+value.codigocop+"</td>"+
+						"<td>"+value.correoinstitucional+"</td>"+
+						"<td>"+value.especialidad.especialidad+"</td>"+
+						"<td>"+value.estado.estado+"</td>"+
 						"<td>"+
 							"<button type='button' class='btn btn-success btnactualizar'"+
-							" data-idsala='"+value.idsala+"'"+
-							" data-descsala='"+value.descsala+"'"+
-							" data-asientos='"+value.asientos+"'"+
-							" data-idestado='"+value.estado.idestado+"'"+
+							" data-iddoctor='"+value.iddoctor+"'"+
+							" data-nombres='"+value.nombres+"'"+
+							" data-apellidopaterno='"+value.apellidopaterno+"'"+
+							" data-apellidomaterno='"+value.apellidomaterno+"'"+
+							" data-fechanacimiento='"+value.fechanacimiento+"'"+
+							" data-tipodocumento='"+value.tipodocumento.tipodocumento+"'"+
+							" data-numerodocumento='"+value.numerodocumento+"'"+
+							" data-correoinstitucional='"+value.correoinstitucional+"'"+
+							" data-especialidad='"+value.especialidad.especialidad+"'"+
+							" data-idestado='"+value.estado.estado+"'"+
 							"><i class='fas fa-pen'></i></button></td>"+
 						"<td>"+
-							"<button type='button' class='btn btn-danger btneliminarsala'"+	
-							" data-idsala='"+value.idsala+"'"+
-							" data-descsala='"+value.descsala+"'"+
+							"<button type='button' class='btn btn-danger btneliminardoctor'"+	
+							" data-iddoctor='"+value.iddoctor+"'"+
+							" data-nombres='"+value.nombres+"'"+
 							"><i class='fas fa-trash'></i></button></td>"+							
 						"</tr>")
 			})
