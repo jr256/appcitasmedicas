@@ -48,7 +48,7 @@ $(document).on("click", ".btnactualizar", function(){
 	var iddistrito = $(this).attr("data-iddistrito");
 	$.ajax({
 		type: "GET",
-		url: "/Distrito/listarDistrito",
+		url: "/Distrito/listarDistritos",
 		dataType: "json",
 		success: function(resultado){
 			if(resultado.length > 0){
@@ -69,7 +69,6 @@ $(document).on("click", ".btnactualizar", function(){
 		url: "/Estado/listarEstados",
 		dataType: "json",
 		success: function(resultado){
-			//console.log(resultado);
 			if(resultado.length > 0){
 				$.each(resultado, function(index, value){
 					$("#cboestado").append(
@@ -81,8 +80,9 @@ $(document).on("click", ".btnactualizar", function(){
 			}			
 		}
 	})
-	$("#modalSala").modal("show");
+	$("#modalSede").modal("show");
 });
+
 
 
 $(document).on("click", "#btnguardar", function(){
@@ -106,7 +106,6 @@ $(document).on("click", "#btnguardar", function(){
 });
 
 
-
 $(document).on("click", ".btneliminarsede", function(){
 	$("#hddideliminarsede").val("");
 	$("#hddideliminarsede").val($(this).attr("data-idsede"));
@@ -114,7 +113,6 @@ $(document).on("click", ".btneliminarsede", function(){
 			$(this).attr("data-nombre")+"?");
 	$("#modalEliminarSede").modal("show");
 })
-
 $(document).on("click", "#btneliminar", function(){
 	$.ajax({
 		type: "DELETE",
