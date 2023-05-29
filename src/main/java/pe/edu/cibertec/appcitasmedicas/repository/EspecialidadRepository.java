@@ -3,9 +3,9 @@ package pe.edu.cibertec.appcitasmedicas.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import pe.edu.cibertec.appcitasmedicas.model.bd.Paciente;
+import pe.edu.cibertec.appcitasmedicas.model.bd.Especialidad;
 
 @Repository
-public interface PacienteRepository extends JpaRepository<Paciente, Integer>{
+public interface EspecialidadRepository extends JpaRepository<Especialidad, Integer> {
 
 }

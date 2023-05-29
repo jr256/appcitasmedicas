@@ -1,10 +1,172 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="layout::head">
+<meta charset="UTF-8">
 </head>
 <body>
+	<script th:src="@{/js/web/doctor/frmdoctor.js}" type="text/javascript"></script>
+	<nav th:insert="layout::menu"></nav>
+	<button type="button" id="btnagregar" class="btn btn-primary">
+		Agregar Doctor</button>
+	<hr />
+	<table class="table" id="tbldoctor">
+		<thead>
+			<tr>
+				<th scope="col">Código</th>
+				<th scope="col">Nombres</th>
+				<th scope="col">Apellido P.</th>
+				<th scope="col">Apellido M.</th>
+				<th scope="col">F.Nacimiento</th>
+				<th scope="col">Tipo Doc.</th>
+				<th scope="col">Documento</th>
+				<th scope="col">COP</th>
+				<th scope="col">Correo</th>
+				<th scope="col">Especialidad</th>
+				<th scope="col">Estado</th>
+				<th scope="col">Actualizar</th>
+				<th scope="col">Eliminar</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="doctor :${listadoctores}">
+				<td th:text="${doctor.iddoctor}"></td>
+				<td th:text="${doctor.nombres}"></td>
+				<td th:text="${doctor.apellidopaterno}"></td>
+				<td th:text="${doctor.apellidomaterno}"></td>
+				<td th:text="${doctor.fechanacimiento}"></td>
+				<td th:text="${doctor.tipodocumento.tipodocumento}"></td>
+				<td th:text="${doctor.numerodocumento}"></td>
+				<td th:text="${doctor.codigocop}"></td>
+				<td th:text="${doctor.correoinstitucional}"></td>
+				<td th:text="${doctor.especialidad.especialidad}"></td>
+				<td th:text="${doctor.estado.estado}"></td>
+				<td>
+					<button type="button" class="btn btn-success btnactualizar"
+						th:data-iddoctor="${doctor.iddoctor}"
+						th:data-nombres="${doctor.nombres}"
+						th:data-apellidopaterno="${doctor.apellidopaterno}"
+						th:data-apellidomaterno="${doctor.apellidomaterno}"
+						th:data-fechanacimiento="${doctor.fechanacimiento}"
+						th:data-numerodocumento="${doctor.numerodocumento}"
+						th:data-codigocop="${doctor.codigocop}"
+						th:data-correoinstitucional="${doctor.correoinstitucional}"
+						th:data-idespecialidad="${doctor.especialidad.idespecialidad}"
+						th:data-idestado="${doctor.estado.idestado}">
+						<i class="fas fa-pen"></i>
+					</button>
+				</td>
+				<td>
+					<button type="button" class="btn btn-danger btneliminardoctor"
+						th:data-iddoctor="${doctor.iddoctor}"
+						th:data-nombres="${doctor.nombres}">
+						<i class="fas fa-trash"></i>
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<!-- Modal Registro / actualizacion Doctor -->
+	<div class="modal fade" id="modalDoctor" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">
+						Mantenimiento de Doctor</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="mb-3">
+						<label for="txtnombres" class="form-label"> Nombres</label> <input
+							type="text" class="form-control" id="txtnombres">
+					</div>
+					<div class="mb-3">
+						<label for="txtapellidopaterno" class="form-label">
+							Apellido P.</label> <input type="text" class="form-control"
+							id="txtapellidopaterno">
+					</div>
+					<div class="mb-3">
+						<label for="txtapellidomaterno" class="form-label">
+							Apellido M.</label> <input type="text" class="form-control"
+							id="txtapellidomaterno">
+					</div>
+					<div class="mb-3">
+						<label for="txtfechanacimiento" class="form-label"> F.
+							Nacimiento</label> <input type="text" class="form-control"
+							id="txtfechanacimiento">
+					</div>
+					<div class="mb-3">
+						<label for="cbotipodocumento" class="form-label"> Documento</label> 
+						<select
+							class="form-control" id="cbotipodocumento"></select>
+					</div>
+					<div class="mb-3">
+						<label for="txtnrodocumento" class="form-label"> Nro.
+							Documento</label> <input type="text" class="form-control"
+							id="txtnrodocumento">
+					</div>
+					</div>
+					<div class="mb-3">
+						<label for="codigocop" class="form-label"> Código COP
+							</label> <input type="text" class="form-control"
+							id="codigocop">
+					</div>
+					<div class="mb-3">
+						<label for="correo" class="form-label"> Correo
+							</label> <input type="text" class="form-control"
+							id="correo">
+					</div>
+					<div class="mb-3">
+						<label for="cboespecialidad" class="form-label"> Especialidad</label> 
+						<select
+							class="form-control" id="cboespecialidad"></select>
+					</div>
+					<div class="mb-3">
+						<label for="cboestado" class="form-label"> Estado</label> 
+						<select
+							class="form-control" id="cboestado"></select>
+					</div>
+					<input type="hidden" id="hddidregistrodoctor">
+					
+				</div>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary" id="btnguardar">Guardar</button>
+				</div>
+				
+			</div>
+		</div>
+		
+	
+
+
+	<!-- Modal Eliminar Doctor -->
+	<div class="modal fade" id="modalEliminarDoctor" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">
+						Eliminar Doctor</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<label id="mensajeeliminar"></label> <input type="hidden"
+						id="hddideliminardoctor" value="0">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary" id="btneliminar">Eliminar</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>
