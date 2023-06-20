@@ -1,5 +1,8 @@
 package pe.edu.cibertec.appcitasmedicas.model.bd;
 
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,37 +16,43 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "cita")
-public class Cita {
+@Table(name = "citacapacidad")
+public class CitaCapacidad {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idcita;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
+	private Integer idcitacapacidad;
+		
+	@Column(name = "fecha")
+	private Date fecha;
 	
-	@ManyToOne
-	@JoinColumn(name = "idpaciente")
-	private Paciente paciente;
 	
-	@ManyToOne
-	@JoinColumn(name = "idhorario")
-	private Horario horario;
-	
-	@ManyToOne
-	@JoinColumn(name = "idespecialidad")
-	private Especialidad especialidad;
-	
-	@ManyToOne
-	@JoinColumn(name = "iddoctor")
-	private Doctor doctor;
 	
 	@ManyToOne
 	@JoinColumn(name = "idsede")
 	private Sede sede;
 	
+	@ManyToOne
+	@JoinColumn(name = "idespecialidad")
+	private Especialidad especialidad;
+
 	
 	@ManyToOne
+	@JoinColumn(name = "iddoctor")
+	private Doctor doctor;
+
+	@ManyToOne
 	@JoinColumn(name = "idhora")
-	private HoraDisponible hora;
+	private Hora hora;
+	
+	
+	@ManyToOne
+	@JoinColumn(name = "idestadocita")
+	private EstadoCita estadocita;
+	
+	@ManyToOne
+	@JoinColumn(name = "idpaciente")
+	private Paciente paciente;
 	
 
 }

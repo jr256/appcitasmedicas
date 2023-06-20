@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="grado")
-public class HoraDisponible {
+public class Hora {
 	
 	@Id
 	private Integer idhora;

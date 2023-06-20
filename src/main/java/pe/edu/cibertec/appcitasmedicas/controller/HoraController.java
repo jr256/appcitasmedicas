@@ -5,6 +5,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/HoraDisponible")
-public class HoraDisponibleController {
+public class HoraController {
 
 }
