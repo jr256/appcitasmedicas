@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import pe.edu.cibertec.appcitasmedicas.model.bd.CitaCapacidad;
-import pe.edu.cibertec.appcitasmedicas.model.sp.CitaCapacidadSP;
 import pe.edu.cibertec.appcitasmedicas.service.CitaCapacidadService;
 
 @Controller

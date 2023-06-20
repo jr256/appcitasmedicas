@@ -16,12 +16,7 @@ public class CitaCapacidadService {
 	 private CitaCapacidadRepository citacapacidadRepository;
 	
 
-	
-//	// public List<CitaCapacidad> listarCitasDisponibles(Integer idsede, Integer idespecialidad, Date fecha) {
-//	        int estadoCita = 1;
-//	        return citacapacidadRepository.findBySedeAndEspecialidadAndFechaAndEstadocita(idsede, idespecialidad, fecha, estadoCita);
-//	    }
-	
+
 
     public List<CitaCapacidad> buscarPorSedeEspecialidadFechaYEstado(Integer idsede, Integer idespecialidad, Date fecha) {
         return citacapacidadRepository.buscarPorSedeEspecialidadFechaYEstado(idsede, idespecialidad, fecha);
