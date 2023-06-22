@@ -34,47 +34,28 @@
 						horarios</button>
 				</div>
 
-				<table class="table" id="tblhorarios">
+				<table class="table" id="tblcitacapacidad">
 					<thead>
 						<tr>
 							<th scope="col">Sede</th>
 							<th scope="col">Especialidad</th>
-							<th scope="col">Nombre Doctor</th>
-							<th scope="col">Apellido Doctor</th>
-							<th scope="col">Turno</th>
+							<th scope="col">Doctor</th>												
 							<th scope="col">Fecha</th>
 							<th scope="col">Hora</th>
 							<th scope="col">Acción</th>
 						</tr>
 					</thead>
 
-					<!-- 
-			<tbody>
-				<tr th:each="sede :${listasedes}">
-					<td th:text="${sede.idsede}"></td>
-					<td th:text="${sede.nombre}"></td>
-					<td th:text="${sede.direccion}"></td>
-					<td th:text="${sede.distrito.distrito}"></td>
-					<td th:text="${sede.estado.estado}"></td>
-					<td>
-						<button type="button" class="btn btn-success btnregistrar"
-							th:data-idsede="${sede.idsede}" 
-							th:data-nombre="${sede.nombre}"
-							th:data-direccion="${sede.direccion}"
-							th:data-iddistrito="${sede.distrito.iddistrito}"
-							th:data-idestado="${sede.estado.idestado}">Seleccionar
-							
-						</button>
-					</td>
 					
-				</tr>
+			<tbody>
+			
 			</tbody>
 			
-			 -->
+		
 				</table>
 
 		<!-- Modal Registro / actualización sede-->
-		<div class="modal fade" id="modalSede" tabindex="-1"
+		<div class="modal fade" id="modalCita" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -84,38 +65,66 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
+					
 					<div class="modal-body">
-						<div class="mb-3">
-							<label for="txtsede" class="form-label"> Sede</label> <input
-								type="text" class="form-control" id="txtsede">
+					
+						<div class="row g-3 align-items-center mb-3">
+							<div class="col-md-3">
+								<label for="txtsede" class="form-label"> Sede</label> 
+							</div>
+							<div class="col-md-8">
+								<input type="text" class="form-control" id="txtsede" disabled>
+							</div>				
 						</div>
-						<div class="mb-3">
-							<label for="txtespecialidad" class="form-label">
-								Especialidad</label> <input type="text" class="form-control"
-								id="txtespecialidad">
+						
+						<div class="row g-3 align-items-center mb-3">
+							<div class="col-md-3">
+								<label for="txtespecialidad" class="form-label"> Especialidad</label> 							
+							</div>
+							<div class="col-md-8">
+								<input type="text" class="form-control" id="txtespecialidad" disabled>
+							</div>				
 						</div>
-						<div class="mb-3">
-							<label for="txtfecha" class="form-label">
-								Fecha</label> <input type="text" class="form-control"
-								id="txtfecha">
+						
+						
+						<div class="row g-3 align-items-center mb-3">
+							<div class="col-md-3">
+								<label for="txtfecha" class="form-label">Fecha</label> 							
+							</div>
+							<div class="col-md-8">
+								<input type="text" class="form-control" id="txtfecha" disabled>
+							</div>				
 						</div>
-						<div class="mb-3">
-							<label for="txthora" class="form-label">
-								Hora</label> <input type="text" class="form-control"
-								id="txthora">
+						
+						
+						<div class="row g-3 align-items-center mb-3">
+							<div class="col-md-3">
+								<label for="txthora" class="form-label">Hora</label> 							
+							</div>
+							<div class="col-md-8">
+								<input type="text" class="form-control" id="txthora" disabled>
+							</div>				
 						</div>
-						<div class="mb-3">
-							<label for="txtnommbresdoctor" class="form-label">
-								Nombre doctor</label> <input type="text" class="form-control"
-								id="txtnommbresdoctor">
+						
+							<div class="row g-3 align-items-center mb-3">
+							<div class="col-md-3">
+								<label for="txtdoctor" class="form-label">Doctor</label>							 
+							</div>
+							<div class="col-md-8">
+								<input type="text" class="form-control" id="txtdoctor" disabled>
+							</div>				
 						</div>
-
-						<input type="hidden" id="hddidregistrosede">
+						
+						
+					
+						
+					 	<input type="hidden" id="hdnidcitacapacidad">
+					
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">Cerrar</button>
-						<button type="button" class="btn btn-primary" id="btnguardar">Confirmar</button>
+						<button type="button" class="btn btn-primary" id="btnguardar">Confirmar cita</button>
 					</div>
 				</div>
 			</div>
