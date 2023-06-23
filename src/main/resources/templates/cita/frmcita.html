@@ -11,48 +11,58 @@
 		<h1 class="mb-3">Agendar Cita</h1>
 	</div>
 
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-12 ">
-
-				<div>
-
-					<label for="sede">Sede</label> 
-					<div class="col-2">
-						<select class="form-control" id="cbosede"></select>
-					</div>
-
-					<label for="especialidad">Especialidad</label> 
-					<div class="col-2">
-						<select class="form-control" id="cboespecialidad"></select>
-					</div>
-						
-					<label for="fechacita">Fecha</label> 
-					<input type="date" id="fechacita">
-
-					<button type="button" class="btn btn-primary" id="btnbuscar">Ver
-						horarios</button>
-				</div>
-
-				<table class="table" id="tblcitacapacidad">
-					<thead>
-						<tr>
-							<th scope="col">Sede</th>
-							<th scope="col">Especialidad</th>
-							<th scope="col">Doctor</th>												
-							<th scope="col">Fecha</th>
-							<th scope="col">Hora</th>
-							<th scope="col">Acción</th>
-						</tr>
-					</thead>
-
+	
+	<div style="margin-left: 60px; margin-right: 20px;">
+				
+		
+		<div class="row g-3 align-items-center mb-3">
+			
+			<div class="col-md-1">
+				<label for="sede">Sede</label> 
+			</div>
+			<div class="col-md-2">
+				<select class="form-control" id="cbosede"></select>
+			</div>					
+			<div class="col-md-1">
+				<label for="especialidad">Especialidad</label>  
+			</div>
+			<div class="col-md-2">
+				<select class="form-control" id="cboespecialidad"></select>
+			</div>
+			<div class="col-md-1">
+				<label for="fechacita">Fecha</label> 
+			</div>
+			<div class="col-md-2">
+				<input class="form-control"  type="date" id="fechacita">
+			</div>
+			<div class="col-md-2">
+				<button type="button" class="btn btn-primary" id="btnbuscar">Ver horarios</button>
+			</div>					
+					
+		</div>
+		
+	
+			<table class="table" id="tblcitacapacidad">
+				<thead>
+					<tr>
+						<th scope="col">Sede</th>
+						<th scope="col">Especialidad</th>
+						<th scope="col">Doctor</th>												
+						<th scope="col">Fecha</th>
+						<th scope="col">Hora</th>
+						<th scope="col">Acción</th>
+					</tr>
+				</thead>
+		
 					
 			<tbody>
 			
 			</tbody>
 			
 		
-				</table>
+		</table>
+				
+	</div>	
 
 		<!-- Modal Registro / actualización sede-->
 		<div class="modal fade" id="modalCita" tabindex="-1"
@@ -130,10 +140,7 @@
 			</div>
 		</div>
 
-			</div>
-
-		</div>
-	</div>
+	
 
 
 </body>

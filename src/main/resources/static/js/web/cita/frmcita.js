@@ -37,42 +37,6 @@ $(document).ready(function() {
 
 
 
-//----------------------------------Prueba
-
-
-$(document).ready(function() {
-	  // Evento click del botón "Buscar"
-	  $('#btnbuscar').click(function() {
-	    // Obtener los valores seleccionados del select y del input date
-	    var sede = $('#cbosede').val();
-	    var especialidad = $('#cboespecialidad').val();
-	    var fecha = $('#fechacita').val();
-
-	    // Mostrar los valores en la consola para verificar
-	    console.log('Sede:', sede);
-	    console.log('Especialidad:', especialidad);
-	    console.log('Fecha:', fecha);
-
-	    // Realizar la llamada AJAX al endpoint del controlador
-	    $.ajax({
-	      url: '/cita/disponibles',
-	      method: 'GET',
-	      data: {
-	        idsede: sede,
-	        idespecialidad: especialidad,
-	        fecha: fecha
-	      },
-	      success: function(response) {
-	        // Manejar la respuesta exitosa
-	        console.log(response); // Aquí puedes hacer lo que necesites con los datos obtenidos
-	      },
-	      error: function(xhr, status, error) {
-	        // Manejar el error
-	        console.error(error);
-	      }
-	    });
-	  });
-	});
 
 
 
@@ -102,7 +66,8 @@ $(document).ready(function() {
 	        	fecha: fecha
 	        	
 	        },
-	        success: function(response) {         
+	        success: function(response) {   
+	        	 console.log(response);
 	        	listarCitasDisponibles(response);
 	        },
 	        error: function(xhr) {          
@@ -146,7 +111,7 @@ function  listarCitasDisponibles(listaCitas) {
 });
 
 
-// Función para confirmar cita
+// Funcion para mostral modal de confirmación de cita
 
 $(document).on("click", ".btnconfirmarcita", function(){
 	$("#txtsede").val($(this).attr("data-sede"));

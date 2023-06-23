@@ -53,6 +53,7 @@ public class DoctorController {
 			objDoctor.setFechanacimiento(doctorRequest.getFechanacimiento());
 			objDoctor.setCodigocop(doctorRequest.getCodigocop());
 			objDoctor.setCorreoinstitucional(doctorRequest.getCorreoinstitucional());
+			objDoctor.setNumerodocumento(doctorRequest.getNumerodocumento());
 			
 			Estado objEstado = new Estado();
 			objEstado.setIdestado(doctorRequest.getIdestado());

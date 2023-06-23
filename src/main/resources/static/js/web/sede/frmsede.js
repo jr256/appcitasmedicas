@@ -1,3 +1,4 @@
+// ********* Botón AGREGAR *************
 $(document).on("click", "#btnagregar", function(){
 	$("#txtnombre").val("");
 	$("#txtdireccion").val("");
@@ -39,7 +40,7 @@ $(document).on("click", "#btnagregar", function(){
 
 
 
-
+// *************** Botón que muestra modal para ACTUALIZAR ********
 $(document).on("click", ".btnactualizar", function(){
 	$("#txtnombre").val($(this).attr("data-nombre"));
 	$("#txtdireccion").val($(this).attr("data-direccion"));
@@ -84,7 +85,7 @@ $(document).on("click", ".btnactualizar", function(){
 });
 
 
-
+// *********** Botón GUARDAR *****************
 $(document).on("click", "#btnguardar", function(){
 	$.ajax({
 		type: "POST",
@@ -136,6 +137,7 @@ function ListarSede(){
 		url: "/sede/listarSedes",
 		dataType: "json",
 		success: function(resultado){
+			 console.log(resultado);
 			$("#tblsede > tbody").html("");
 			$.each(resultado, function(index, value){
 				$("#tblsede > tbody").append("<tr>"+
