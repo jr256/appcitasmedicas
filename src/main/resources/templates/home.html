@@ -3,14 +3,16 @@
 <head th:insert="layout::head">
 <meta charset="UTF-8">
 </head>
-<body>
+<body >
 
-<script th:src="@{/js/web/home.js}" type="text/javascript"></script>
+	<script th:src="@{/js/web/home.js}" type="text/javascript"></script>
+
+	<div>
+		<nav th:insert="layout::menu"></nav>
+		<h2>Bienvenido </h2>
+	
+	</div>      
       
-<nav th:insert="layout::menu"></nav>
-
-
-      <h1>Bienvenido </h1>
 
 </body>
 

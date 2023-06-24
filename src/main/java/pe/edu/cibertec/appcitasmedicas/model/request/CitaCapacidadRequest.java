@@ -13,8 +13,7 @@ public class CitaCapacidadRequest {
 	private Integer idespecialidad;	
 	private Integer iddoctor;
 	private Integer idhora;
-	private Integer idpaciente;
-	
+	private Integer idpaciente;	
 	private Integer idestadocita;
 
 }

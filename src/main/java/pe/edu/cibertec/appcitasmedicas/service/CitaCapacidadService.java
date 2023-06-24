@@ -16,12 +16,17 @@ public class CitaCapacidadService {
 	 private CitaCapacidadRepository citacapacidadRepository;
 	
 
-
-
     public List<CitaCapacidad> buscarPorSedeEspecialidadFechaYEstado(Integer idsede, Integer idespecialidad, Date fecha) {
         return citacapacidadRepository.buscarPorSedeEspecialidadFechaYEstado(idsede, idespecialidad, fecha);
     }
+    
 	
+    public void registrarCita(CitaCapacidad citacapacidad) {
+    	citacapacidadRepository.save(citacapacidad);
+	}
+    
+  
+
 
 
 }

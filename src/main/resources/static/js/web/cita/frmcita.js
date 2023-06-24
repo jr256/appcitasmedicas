@@ -95,8 +95,12 @@ function  listarCitasDisponibles(listaCitas) {
 	      "<td>" + fechaFormateada + "</td>" +   
 	      "<td>" + cita.hora.hora + "</td>" + 
 	      "<td>"+
-	      "<button type='button' class='btn btn-success btnconfirmarcita'"+
+	      "<button type='button' class='btn btn-success btnseleccionarcita'"+
 	      " data-idcitacapacidad='"+ cita.idcitacapacidad +"'"+
+	      " data-idespecialidad='"+ cita.especialidad.idespecialidad +"'"+
+	      " data-idsede='"+ cita.sede.idsede +"'"+
+	      " data-idhora='"+ cita.hora.idhora +"'"+
+	      " data-iddoctor='"+ cita.doctor.iddoctor +"'"+
 	      " data-sede='"+ cita.sede.nombre +"'"+
 	      " data-especialidad='"+ cita.especialidad.especialidad +"'"+
 	      " data-fecha='"+ fechaFormateada +"'"+
@@ -111,19 +115,69 @@ function  listarCitasDisponibles(listaCitas) {
 });
 
 
-// Funcion para mostral modal de confirmación de cita
+// Boton SELECCIONAR que muestra modal de confirmación de cita
 
-$(document).on("click", ".btnconfirmarcita", function(){
+$(document).on("click", ".btnseleccionarcita", function(){
 	$("#txtsede").val($(this).attr("data-sede"));
 	$("#txtespecialidad").val($(this).attr("data-especialidad"));
 	$("#txtfecha").val($(this).attr("data-fecha"));
 	$("#txthora").val($(this).attr("data-hora"));
-	$("#txtdoctor").val($(this).attr("data-doctor"));	
-	$("#hdnidcitacapacidad").val($(this).attr("data-idcitacapacidad"));
+	$("#txtdoctor").val($(this).attr("data-doctor"));
+	
+	//Campos ocultos para guardar los Id
+	$("#hdidcitacapacidad").val($(this).attr("data-idcitacapacidad"));
+	$("#hdidsede").val($(this).attr("data-idsede"));
+	$("#hdidespecialidad").val($(this).attr("data-idespecialidad"));
+	$("#hdidhora").val($(this).attr("data-idhora"));
+	$("#hdiddoctor").val($(this).attr("data-iddoctor"));
 	
 
 
 	$("#modalCita").modal("show");
 });
 
+
+// ***************** Boton REGISTRAR CITA **********
+$(document).on("click", "#btnregistrarcita", function() {
+	var fecha = $("#txtfecha").val();
+	var fechaParts = fecha.split("/");
+	var fechaFormateada = fechaParts[2] + "-" + fechaParts[1] + "-" + fechaParts[0];
+	 
+	var datos = {
+	    idcitacapacidad: $("#hdidcitacapacidad").val(),
+	    idespecialidad: $("#hdidespecialidad").val(),
+	    idsede: $("#hdidsede").val(),
+	    idhora: $("#hdidhora").val(),
+	    iddoctor: $("#hdiddoctor").val(),
+	    idestadocita: 2,
+	    idpaciente: 1,
+	    fecha: fechaFormateada
+	  };
+	  
+	  console.log(datos)
+
+	  // Realizar la solicitud POST
+	  $.ajax({
+	    url: "/cita/registrar",
+	    type: "POST",
+	    contentType: "application/json",
+	    data: JSON.stringify(datos),
+	    success: function(response) {
+	    	
+	      console.log("Datos enviados correctamente");
+	      alert(response.mensaje);
+	      //Actualizamos el listado dando click en el botón buscar
+	      $("#btnbuscar").trigger("click");
+	      
+	     
+	    },
+	    error: function(xhr, status, error) {
+	      
+	      console.error("Error al enviar los datos:", error);
+	      
+	    }
+	  });
+	  
+	  $("#modalCita").modal("hide");
+});
 

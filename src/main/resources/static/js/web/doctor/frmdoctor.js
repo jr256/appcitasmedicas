@@ -147,7 +147,7 @@ $(document).on("click", ".btnactualizar", function(){
 
 
 	
-
+// **************** Boton GUARDAR ************
 
 $(document).on("click", "#btnguardar", function(){
     var datos = {
@@ -164,7 +164,7 @@ $(document).on("click", "#btnguardar", function(){
         idtipodocumento: $("#cbotipodocumento").val()
     };
 
-    console.log("Datos enviados POST: ", datos); // Mostrar datos en la consola
+    console.log("Datos enviados POST: ", datos); 
 
     $.ajax({
         type: "POST",
