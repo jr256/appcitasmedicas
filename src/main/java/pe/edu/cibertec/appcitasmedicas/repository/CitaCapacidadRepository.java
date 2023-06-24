@@ -1,6 +1,5 @@
 package pe.edu.cibertec.appcitasmedicas.repository;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,9 +15,11 @@ public interface CitaCapacidadRepository extends JpaRepository<CitaCapacidad, In
 	
 	
 	@Query("SELECT cc FROM CitaCapacidad cc WHERE cc.sede.idsede = :idsede AND cc.especialidad.idespecialidad = :idespecialidad AND cc.fecha = :fecha AND cc.estadocita.idestadocita = 1")
-	List<CitaCapacidad> buscarPorSedeEspecialidadFechaYEstado(Integer idsede, Integer idespecialidad, Date fecha);
+	List<CitaCapacidad> buscarPorSedeEspecialidadFechaYEstado(Integer idsede, Integer idespecialidad, String fecha);
 
 	
+	@Query("SELECT cc FROM CitaCapacidad cc WHERE cc.sede.idsede = :idsede AND cc.especialidad.idespecialidad = :idespecialidad AND cc.fecha = :fecha AND cc.estadocita.idestadocita = 2")
+	List<CitaCapacidad> buscarPorSedeEspecialidadFechaYEstadoR(Integer idsede, Integer idespecialidad, String fecha);
 		    
 	
 	
