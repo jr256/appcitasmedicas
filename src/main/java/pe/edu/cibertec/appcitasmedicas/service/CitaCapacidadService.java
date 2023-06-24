@@ -1,6 +1,5 @@
 package pe.edu.cibertec.appcitasmedicas.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,13 @@ public class CitaCapacidadService {
 	 private CitaCapacidadRepository citacapacidadRepository;
 	
 
-    public List<CitaCapacidad> buscarPorSedeEspecialidadFechaYEstado(Integer idsede, Integer idespecialidad, Date fecha) {
+    public List<CitaCapacidad> buscarPorSedeEspecialidadFechaYEstado(Integer idsede, Integer idespecialidad, String fecha) {
         return citacapacidadRepository.buscarPorSedeEspecialidadFechaYEstado(idsede, idespecialidad, fecha);
+    }
+    
+    
+    public List<CitaCapacidad> buscarCitasReservadas(Integer idsede, Integer idespecialidad, String fecha) {
+        return citacapacidadRepository.buscarPorSedeEspecialidadFechaYEstadoR(idsede, idespecialidad, fecha);
     }
     
 	

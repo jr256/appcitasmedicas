@@ -1,7 +1,5 @@
 package pe.edu.cibertec.appcitasmedicas.model.bd;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +22,7 @@ public class CitaCapacidad {
 	private Integer idcitacapacidad;
 		
 	@Column(name = "fecha")
-	private Date fecha;
+	private String fecha;
 	
 	
 	

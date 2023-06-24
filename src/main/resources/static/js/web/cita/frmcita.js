@@ -82,17 +82,14 @@ $(document).ready(function() {
 function  listarCitasDisponibles(listaCitas) {
 	var tablaCitas = $("#tblcitacapacidad tbody");
 	  tablaCitas.empty();
-	  // Agregar las filas correspondientes a los alumnos encontrados
+	  
 	  $.each(listaCitas, function(index, cita) {
-	    var fechaCompleta = new Date(cita.fecha);
-	    var opcionesFormato = { year: 'numeric', month: '2-digit', day: '2-digit' };
-	    var fechaFormateada = fechaCompleta.toLocaleDateString('es-ES', opcionesFormato);
-
+	    
 	    var fila = "<tr>" +
 	      "<td>" + cita.sede.nombre + "</td>" +
 	      "<td>" + cita.especialidad.especialidad + "</td>" +
 	      "<td>" + cita.doctor.nombres + " " + cita.doctor.apellidopaterno + "</td>" +	      
-	      "<td>" + fechaFormateada + "</td>" +   
+	      "<td>" + cita.fecha + "</td>" +   
 	      "<td>" + cita.hora.hora + "</td>" + 
 	      "<td>"+
 	      "<button type='button' class='btn btn-success btnseleccionarcita'"+
@@ -103,7 +100,7 @@ function  listarCitasDisponibles(listaCitas) {
 	      " data-iddoctor='"+ cita.doctor.iddoctor +"'"+
 	      " data-sede='"+ cita.sede.nombre +"'"+
 	      " data-especialidad='"+ cita.especialidad.especialidad +"'"+
-	      " data-fecha='"+ fechaFormateada +"'"+
+	      " data-fecha='"+ cita.fecha +"'"+
 	      " data-hora='"+ cita.hora.hora +"'"+
 	      " data-doctor='"+ (cita.doctor.nombres + " " + cita.doctor.apellidopaterno) +"'"+
 	      ">Seleccionar</button></td>"+
@@ -140,9 +137,11 @@ $(document).on("click", ".btnseleccionarcita", function(){
 // ***************** Boton REGISTRAR CITA **********
 $(document).on("click", "#btnregistrarcita", function() {
 	var fecha = $("#txtfecha").val();
-	var fechaParts = fecha.split("/");
-	var fechaFormateada = fechaParts[2] + "-" + fechaParts[1] + "-" + fechaParts[0];
+	//var fechaParts = fecha.split("/");
+	//var fechaFormateada = fechaParts[2] + "-" + fechaParts[1] + "-" + fechaParts[0];
 	 
+	
+	
 	var datos = {
 	    idcitacapacidad: $("#hdidcitacapacidad").val(),
 	    idespecialidad: $("#hdidespecialidad").val(),
@@ -151,7 +150,7 @@ $(document).on("click", "#btnregistrarcita", function() {
 	    iddoctor: $("#hdiddoctor").val(),
 	    idestadocita: 2,
 	    idpaciente: 1,
-	    fecha: fechaFormateada
+	    fecha: fecha
 	  };
 	  
 	  console.log(datos)

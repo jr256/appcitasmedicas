@@ -1,10 +1,9 @@
 package pe.edu.cibertec.appcitasmedicas.controller;
 
-import java.util.Date;
+//import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,15 +38,34 @@ public class CitaCapacidadController {
 		return "cita/frmcita";
 	}
 	
+	@GetMapping("/consultacitas")
+	public String listapago() {
+		
+		return "cita/consultacita";
+	}
+	
+	
    @GetMapping("/disponibles")
    @ResponseBody
     public List<CitaCapacidad> listarCitasDisponibles(
         @RequestParam("idsede") Integer idsede,
         @RequestParam("idespecialidad") Integer idespecialidad,
-        @RequestParam("fecha") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha
+        @RequestParam("fecha") String fecha
     ) {
         return citacapacidadService.buscarPorSedeEspecialidadFechaYEstado(idsede, idespecialidad, fecha);
     }
+   
+
+   @GetMapping("/reservadas")
+   @ResponseBody
+    public List<CitaCapacidad> listarCitasProgramadas(
+        @RequestParam("idsede") Integer idsede,
+        @RequestParam("idespecialidad") Integer idespecialidad,
+        @RequestParam("fecha")  String fecha
+    ) {
+        return citacapacidadService.buscarCitasReservadas(idsede, idespecialidad, fecha);
+    }
+      
    
    
  
@@ -62,9 +80,14 @@ public class CitaCapacidadController {
 		try {			
 			
 			CitaCapacidad objCitaCapacidad = new CitaCapacidad();
+			
+			System.out.println("***Fecha recibida: " + citacapacidadRequest.getFecha());
+			
 			if(citacapacidadRequest.getIdcitacapacidad() > 0) {
 				objCitaCapacidad.setIdcitacapacidad(citacapacidadRequest.getIdcitacapacidad());
 			}
+			
+					
 			objCitaCapacidad.setFecha(citacapacidadRequest.getFecha());
 			
 			
@@ -112,11 +135,7 @@ public class CitaCapacidadController {
 	}
    
    
-	@GetMapping("/consultacitas")
-	public String listapago() {
-		
-		return "cita/consultacita";
-	}
+
    
    
 
