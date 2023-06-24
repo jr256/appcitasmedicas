@@ -217,6 +217,8 @@ $(document).on("click", "#btneliminar", function(){
 	$("#modalEliminarDoctor").modal("hide");
 })
 
+
+
 function ListarDoctor(){
 	$.ajax({
 		type: "GET",

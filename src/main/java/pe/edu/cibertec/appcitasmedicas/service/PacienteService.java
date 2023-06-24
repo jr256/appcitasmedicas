@@ -25,4 +25,7 @@ public class PacienteService {
 	public void eliminarPaciente(Integer idpaciente) {
 		pacienteRepository.deleteById(idpaciente);
 	}
+    public Paciente buscarPaciente(Integer idpaciente) {
+        return pacienteRepository.findById(idpaciente).orElse(null);
+    }
 }
