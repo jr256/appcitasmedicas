@@ -101,7 +101,7 @@ public class PacienteController {
 	
 	@GetMapping("/buscarPaciente")
 	@ResponseBody
-	public Paciente buscarpPaciente(@RequestParam("idpaciente") Integer idpaciente) {
+	public Paciente buscarPaciente(@RequestParam("idpaciente") Integer idpaciente) {
 	    return pacienteService.buscarPaciente(idpaciente);
 	}
 }

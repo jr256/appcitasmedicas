@@ -218,7 +218,7 @@ $(document).ready(function() {
       $.ajax({
         url: "/paciente/buscarPaciente",
         type: "GET",
-        data: { idpaciente: idPaciente },
+        data: { idpaciente: idpaciente },
         success: function(response) {
           // Actualizar la tabla de alumnos con el resultado de la búsqueda
         	actualizarTablaPacientes([response]);
@@ -269,7 +269,7 @@ $(document).ready(function() {
       " data-apellidopaterno='" + value.apellidopaterno + "'" +
       " data-apellidomaterno='" + value.apellidomaterno + "'" +
       "><i class='fas fa-trash'></i></button></td>" +
-      "</tr>");
+      "</tr>";
       tablapaciente.append(fila);
     });
   }
