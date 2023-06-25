@@ -1,46 +1,3 @@
-$(document).on("click", "#btnagregar", function(){
-	$("#txtnombres").val("");
-	$("#txtapellidopaterno").val("");
-	$("#txtapellidomaterno").val("");
-	$("#txtnumerodocumento").val("");
-	$("#txtfechanacimiento").val("");
-	$("#txtcorreoelectronico").val("");
-	$("#txtpassword").val("");
-	$("#hddidregistropaciente").val("0");
-	$("#cbotipodocumento").empty();
-	$.ajax({
-		type: "GET",
-		url: "/TipoDocumento/listarTipoDocumentos",
-		dataType: "json",
-		success: function(resultado){
-			if(resultado.length > 0){
-				$.each(resultado, function(index, value){
-					$("#cbotipodocumento").append(
-							`<option value="${value.idtipodocumento}">
-								${value.tipodocumento}</option>`
-							);
-				})
-			}			
-		}
-	})
-	$("#cboestado").empty();
-	$.ajax({
-		type: "GET",
-		url: "/Estado/listarEstados",
-		dataType: "json",
-		success: function(resultado){
-			if(resultado.length > 0){
-				$.each(resultado, function(index, value){
-					$("#cboestado").append(
-							`<option value="${value.idestado}">
-								${value.estado}</option>`
-							);
-				})
-			}			
-		}
-	})
-	$("#modalPaciente").modal("show");
-});
 
 
 $(document).on("click", ".btnactualizar", function(){
@@ -152,41 +109,6 @@ $(document).on("click", "#btnguardar", function(){
     $("#modalPaciente").modal("hide");
 });
 
-$(document).on("click", ".btneliminarpaciente", function(){
-	$("#hddideliminarpaciente").val("");
-	$("#hddideliminarpaciente").val($(this).attr("data-idpaciente"));
-	$("#mensajeeliminar").text("¿Está seguro de eliminar a " +
-		    $(this).attr("data-nombres") +
-		    " " +
-		    $(this).attr("data-apellidopaterno") +
-		    " " +
-		    $(this).attr("data-apellidomaterno") +
-		    "?");
-	$("#modalEliminarPaciente").modal("show");
-});
-
-//************* Botón ELIMINAR REGISTRO *******************
-$(document).on("click", "#btneliminar", function(){
-	$.ajax({
-		type: "DELETE",
-		contentType: 'application/json',
-		url: "/paciente/eliminarPaciente",
-		data: JSON.stringify({
-			idpaciente: $("#hddideliminarpaciente").val()
-		}),
-		success: function(resultado){
-			alert(resultado.mensaje);
-			ListarPaciente();
-		}
-	})
-	$("#modalEliminarPaciente").modal("hide");
-})
-
-
-
-
-
-
 
 
 
@@ -240,35 +162,14 @@ $(document).ready(function() {
     $.each(listaPaciente, function(index, value) {
       var fila = "<tr>" +
       "<td>" + value.idpaciente + "</td>" +
-      "<td>" + value.nombres + "</td>" +
-      "<td>" + value.apellidopaterno + "</td>" +
-      "<td>" + value.apellidomaterno + "</td>" +
+      "<td>"+ value.nombres + " " + value.apellidopaterno + " " + value.apellidomaterno + "</td>"+
       "<td>" + value.tipodocumento.tipodocumento + "</td>" +
       "<td>" + value.numerodocumento + "</td>" +
       "<td>" + value.fechanacimiento + "</td>" +
       "<td>" + value.correoelectronico + "</td>" +
-      "<td>" + value.password + "</td>" +
-      "<td>" + value.estado.estado + "</td>" +
-      "<td>" +
-      "<button type='button' class='btn btn-success btnactualizar'" +
-      " data-idpaciente='" + value.idpaciente + "'" +
-      " data-nombres='" + value.nombres + "'" +
-      " data-apellidopaterno='" + value.apellidopaterno + "'" +
-      " data-apellidomaterno='" + value.apellidomaterno + "'" +
-      " data-fechanacimiento='" + value.fechanacimiento + "'" +
-      " data-idtipodocumento='" + value.tipodocumento.idtipodocumento + "'" +
-      " data-numerodocumento='" + value.numerodocumento + "'" +
-      " data-correoelectronico='" + value.correoelectronico + "'" +
-      " data-password='" + value.password + "'" +
-      " data-idestado='" + value.estado.idestado + "'" +
-      "><i class='fas fa-pen'></i></button></td>" +
-      "<td>" +
-      "<button type='button' class='btn btn-danger btneliminarpaciente'" +
-      " data-idpaciente='" + value.idpaciente + "'" +
-      " data-nombres='" + value.nombres + "'" +
-      " data-apellidopaterno='" + value.apellidopaterno + "'" +
-      " data-apellidomaterno='" + value.apellidomaterno + "'" +
-      "><i class='fas fa-trash'></i></button></td>" +
+
+      "<td>" + value.estado.estado + "</td>"    
+     
       "</tr>";
       tablapaciente.append(fila);
     });
