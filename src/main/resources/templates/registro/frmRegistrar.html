@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Regístrate</title>
+<link th:href="@{/css/bootstrap/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/fontawesome/all.min.css}" rel="stylesheet">
+<script th:src="@{/js/web/registro/frmRegistrar.js}" type="text/javascript"></script>
+</head>
+<body onload="cargarEstados(); cargarTiposDocumento();">
+<script th:src="@{/js/web/registro/frmRegistrar.js}" type="text/javascript"></script>
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3 aling-items-center">
+			<h1>Registrate</h1>
+			<form th:action="@{/registro/registrar}" method="post" th:object="${paciente}">
+				<div class="form-group">
+					<label class="control-label" for="txtnombres">Nombres</label>
+					<input id="txtnombres" type="text" class="form-control" th:field="*{nombres}" required> 
+				</div>	
+				<div class="form-group">
+					<label class="control-label" for="txtapellidpaterno">Apellido Paterno</label>
+					<input id="txtapellidpaterno" type="text" class="form-control" th:field="*{apellidopaterno}" required> 
+				</div>	
+				<div class="form-group">
+					<label class="control-label" for="txtapellidmaterno">Apellido Materno</label>
+					<input id="txtapellidmaterno" type="text" class="form-control" th:field="*{apellidomaterno}" required> 
+				</div>	
+				<div class="form-group">
+				    <label class="control-label" for="cbotipodocumento">Documento</label>
+				    <select id="cbotipodocumento" class="form-control" th:field="*{tipodocumento.idtipodocumento}">
+				    </select>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="txtnumerodocumento">N.Documento</label>
+					<input id="txtnumerodocumento" type="text" class="form-control" th:field="*{numerodocumento}" required>
+				</div>	
+				<div class="form-group">
+					<label class="control-label" for="txtfechanacimiento">F. Nacimiento</label>
+					<input id="txtfechanacimiento" type="date" class="form-control" th:field="*{fechanacimiento}" required>
+				</div>																				
+				<div class="form-group">
+					<label class="control-label" for="email">Email</label>
+					<input id="email" type="email" class="form-control" th:field="*{correoelectronico}" required> 
+				</div>	
+				<div class="form-group">
+					<label class="control-label" for="passw">Password</label>
+					<input id="passw" type="password" class="form-control" th:field="*{password}" required> 
+				</div>	
+				<div class="form-group">
+				    <label class="control-label" for="cboestado">Estado</label>
+				    <select id="cboestado" class="form-control" th:field="*{estado.idestado}">
+				    </select>
+				</div>
+				<br>
+				<div class="form-group">
+					<button type="submit" class="btn btn-success">Registrar usuario</button>
+					<span>Si estás registrado <button type="button" class="btn btn-outline-primary" href="/login">Inicia Sesión</button></span>		
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>

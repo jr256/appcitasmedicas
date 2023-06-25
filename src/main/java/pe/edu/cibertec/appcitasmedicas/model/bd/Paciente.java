@@ -7,7 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -42,4 +45,8 @@ public class Paciente {
 	@JoinColumn(name ="idestado")
 	private Estado estado;
 	
+	@JsonIgnore
+	@OneToOne
+    @JoinColumn(name = "idusuario")
+    private Usuario usuario;
 }

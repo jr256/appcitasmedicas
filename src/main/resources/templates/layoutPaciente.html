@@ -27,9 +27,18 @@
 						aria-current="page" th:href="@{/homePaciente}"><img src="/img/logoemp.jpg" width="100px" ></a></li>						
 
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" th:href="@{/cita/frmcita}">Agendar cita</a></li>						
+						aria-current="page" th:href="@{/cita/frmcita}">Agendar cita</a></li>	
 						
-					
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" th:href="@{/logout}">Cerrar Sesion</a></li>						
+					<!-- 	
+					<li class="nav-item">
+					    <a class="nav-link active" aria-current="page">
+					        IdPaciente: <span th:text="${session.userType == 'Paciente' ? session.getAttribute('idpaciente') : ''}"></span>
+					    </a>
+					</li>
+
+					 -->
 
 				</ul>
 			</div>
