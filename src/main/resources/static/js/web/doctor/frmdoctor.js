@@ -183,7 +183,7 @@ $(document).on("click", "#btnguardar", function(){
 
 
 
-//************* Botón ELIMINAR *******************
+//************* Botón Mostrar modal ELIMINAR *******************
 
 $(document).on("click", ".btneliminardoctor", function(){
 	$("#hddideliminardoctor").val("");
@@ -201,6 +201,7 @@ $(document).on("click", ".btneliminardoctor", function(){
 
 
 //************* Botón ELIMINAR REGISTRO *******************
+
 $(document).on("click", "#btneliminar", function(){
 	$.ajax({
 		type: "DELETE",
@@ -216,6 +217,8 @@ $(document).on("click", "#btneliminar", function(){
 	})
 	$("#modalEliminarDoctor").modal("hide");
 })
+
+
 
 
 

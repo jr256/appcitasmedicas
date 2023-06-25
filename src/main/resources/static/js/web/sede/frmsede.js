@@ -107,6 +107,8 @@ $(document).on("click", "#btnguardar", function(){
 });
 
 
+
+//Muestra modal de ELIMINAR
 $(document).on("click", ".btneliminarsede", function(){
 	$("#hddideliminarsede").val("");
 	$("#hddideliminarsede").val($(this).attr("data-idsede"));
@@ -114,6 +116,8 @@ $(document).on("click", ".btneliminarsede", function(){
 			$(this).attr("data-nombre")+"?");
 	$("#modalEliminarSede").modal("show");
 })
+
+
 $(document).on("click", "#btneliminar", function(){
 	$.ajax({
 		type: "DELETE",

@@ -66,7 +66,7 @@ public class SedeController {
 		try {
 			sedeService.eliminarSede(sedeRequest.getIdsede());
 		} catch (Exception e) {
-			mensaje = "Sala no eliminada";
+			mensaje = "Sala no eliminada. Tiene transacciones asociadas.";
 			respuesta = false;
 		}
 		return ResultadoResponse.builder()

@@ -137,9 +137,8 @@ $(document).on("click", ".btnseleccionarcita", function(){
 // ***************** Boton REGISTRAR CITA **********
 $(document).on("click", "#btnregistrarcita", function() {
 	var fecha = $("#txtfecha").val();
-	//var fechaParts = fecha.split("/");
-	//var fechaFormateada = fechaParts[2] + "-" + fechaParts[1] + "-" + fechaParts[0];
-	 
+	var idPaciente = $("#txtidpaciente").val().trim();
+ 
 	
 	
 	var datos = {
@@ -149,7 +148,7 @@ $(document).on("click", "#btnregistrarcita", function() {
 	    idhora: $("#hdidhora").val(),
 	    iddoctor: $("#hdiddoctor").val(),
 	    idestadocita: 2,
-	    idpaciente: 1,
+	    idpaciente: idPaciente,
 	    fecha: fecha
 	  };
 	  
@@ -171,6 +170,7 @@ $(document).on("click", "#btnregistrarcita", function() {
 	     
 	    },
 	    error: function(xhr, status, error) {
+	    	alert(response.mensaje);
 	      
 	      console.error("Error al enviar los datos:", error);
 	      

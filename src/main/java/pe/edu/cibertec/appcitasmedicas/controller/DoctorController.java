@@ -89,7 +89,7 @@ public class DoctorController {
 		try {
 			doctorService.eliminarDoctor(doctorRequest.getIddoctor());
 		}catch (Exception e) {
-			mensaje = "Doctor no eliminado";
+			mensaje = "Doctor no eliminado. Tiene transacciones asociadas.";
 			respuesta = false;
 		}
 		return ResultadoResponse.builder()
